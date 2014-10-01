@@ -13,9 +13,9 @@ defmodule Saxy do
     sax_callback_state = nil
 
     :erlsom.parse_sax("", 
-    sax_callback_state, 
-    &sax_event_handler/2, 
-    [{:continuation_function, &continue_file/2, c_state}])
+                      sax_callback_state, 
+                      &sax_event_handler/2, 
+                      [{:continuation_function, &continue_file/2, c_state}])
 
     :ok = File.close(handle)
   end
@@ -45,7 +45,7 @@ defmodule Saxy do
     %{state | title: state.element_acc}
   end
 
-  def sax_event_handler({:endElement, _, 'text', _}, %SaxState{title: title} = state) do
+  def sax_event_handler({:endElement, _, 'text', _}, state) do
     state = %{state | text: state.element_acc}
     IO.puts "Title: #{state.title}"
     IO.puts "Text:  #{state.text}"
