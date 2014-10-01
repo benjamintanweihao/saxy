@@ -20,7 +20,7 @@ defmodule Saxy do
     :ok = File.close(handle)
   end
 
-  def	continue_file(tail, {handle, offset, chunk}) do
+  def continue_file(tail, {handle, offset, chunk}) do
     case :file.pread(handle, offset, chunk) do
       {:ok, data} ->
         {<<tail :: binary, data::binary>>, {handle, offset + chunk, chunk}}
