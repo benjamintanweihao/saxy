@@ -34,7 +34,7 @@ defmodule Saxy do
   end
 
   def sax_event_handler({:startElement, _, 'text', _, _}, state) do
-    state
+    %{state | element_acc: ""}
   end
 
   def sax_event_handler({:characters, value}, %SaxState{element_acc: element_acc} = state) do
